@@ -1,0 +1,235 @@
+@import 'tailwindcss';
+@import 'tw-animate-css';
+@import 'shadcn/tailwind.css';
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --font-sans: var(--font-serif), 'Georgia', serif;
+  --font-serif: var(--font-serif), 'Georgia', serif;
+  --font-hand: var(--font-hand), 'Segoe Script', cursive;
+  --font-heading: var(--font-serif), 'Georgia', serif;
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+
+  /* Diary palette */
+  --color-parchment: var(--parchment);
+  --color-parchment-deep: var(--parchment-deep);
+  --color-parchment-edge: var(--parchment-edge);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-leather: var(--leather);
+  --color-leather-dark: var(--leather-dark);
+  --color-wax: var(--wax);
+  --color-gold: var(--gold);
+  --color-tape: var(--tape);
+
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+}
+
+:root {
+  color-scheme: light;
+
+  /* Warm walnut desk backdrop */
+  --background: oklch(0.27 0.035 55);
+  --foreground: oklch(0.3 0.04 50);
+
+  --parchment: oklch(0.92 0.035 85);
+  --parchment-deep: oklch(0.86 0.045 78);
+  --parchment-edge: oklch(0.78 0.055 70);
+  --ink: oklch(0.32 0.045 45);
+  --ink-soft: oklch(0.48 0.04 55);
+  --leather: oklch(0.34 0.05 48);
+  --leather-dark: oklch(0.24 0.045 45);
+  --wax: oklch(0.46 0.14 28);
+  --gold: oklch(0.74 0.09 75);
+  --tape: oklch(0.86 0.05 88 / 0.55);
+
+  --card: oklch(0.92 0.035 85);
+  --card-foreground: oklch(0.32 0.045 45);
+  --popover: oklch(0.92 0.035 85);
+  --popover-foreground: oklch(0.32 0.045 45);
+  --primary: oklch(0.34 0.05 48);
+  --primary-foreground: oklch(0.92 0.035 85);
+  --secondary: oklch(0.86 0.045 78);
+  --secondary-foreground: oklch(0.32 0.045 45);
+  --muted: oklch(0.86 0.045 78);
+  --muted-foreground: oklch(0.48 0.04 55);
+  --accent: oklch(0.46 0.14 28);
+  --accent-foreground: oklch(0.92 0.035 85);
+  --destructive: oklch(0.5 0.16 28);
+  --border: oklch(0.7 0.05 65);
+  --input: oklch(0.7 0.05 65);
+  --ring: oklch(0.46 0.14 28);
+  --radius: 0.5rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-serif;
+  }
+}
+
+@layer utilities {
+  /* Aged parchment paper surface */
+  .paper-texture {
+    background-color: var(--parchment);
+    background-image:
+      radial-gradient(
+        circle at 18% 22%,
+        oklch(0.7 0.06 60 / 0.12) 0%,
+        transparent 38%
+      ),
+      radial-gradient(
+        circle at 82% 78%,
+        oklch(0.65 0.07 55 / 0.14) 0%,
+        transparent 42%
+      ),
+      radial-gradient(
+        circle at 60% 12%,
+        oklch(0.95 0.03 90 / 0.5) 0%,
+        transparent 30%
+      );
+  }
+
+  /* Faint ruled notebook lines */
+  .paper-lines {
+    background-image: repeating-linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent 31px,
+      oklch(0.55 0.05 60 / 0.18) 31px,
+      oklch(0.55 0.05 60 / 0.18) 32px
+    );
+  }
+
+  /* Coffee ring stain */
+  .coffee-stain {
+    border-radius: 9999px;
+    background: radial-gradient(
+      circle,
+      transparent 0%,
+      transparent 58%,
+      oklch(0.45 0.08 50 / 0.22) 60%,
+      oklch(0.4 0.09 45 / 0.28) 66%,
+      oklch(0.5 0.07 52 / 0.12) 72%,
+      transparent 76%
+    );
+  }
+
+  /* Dark walnut leather */
+  .leather-texture {
+    background-color: var(--leather);
+    background-image:
+      radial-gradient(
+        circle at 30% 20%,
+        oklch(0.4 0.05 50 / 0.6) 0%,
+        transparent 45%
+      ),
+      radial-gradient(
+        circle at 75% 80%,
+        oklch(0.2 0.04 42 / 0.7) 0%,
+        transparent 50%
+      ),
+      repeating-linear-gradient(
+        45deg,
+        oklch(0.3 0.045 46 / 0.25) 0px,
+        oklch(0.3 0.045 46 / 0.25) 2px,
+        transparent 2px,
+        transparent 6px
+      );
+  }
+
+  /* Tape strip */
+  .tape-strip {
+    background: linear-gradient(
+      135deg,
+      oklch(0.9 0.04 90 / 0.5),
+      oklch(0.82 0.05 85 / 0.45)
+    );
+    box-shadow: inset 0 0 8px oklch(0.7 0.05 70 / 0.3);
+  }
+
+  .torn-edge {
+    -webkit-mask-image: radial-gradient(
+      circle at center bottom,
+      black 0 5px,
+      transparent 5.5px
+    );
+    -webkit-mask-size: 14px 100%;
+    -webkit-mask-repeat: repeat-x;
+    -webkit-mask-position: bottom;
+    mask-image: radial-gradient(
+      circle at center bottom,
+      black 0 5px,
+      transparent 5.5px
+    );
+    mask-size: 14px 100%;
+    mask-repeat: repeat-x;
+    mask-position: bottom;
+  }
+
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  @keyframes page-turn-next {
+    from {
+      opacity: 0;
+      transform: rotateY(-14deg) translateX(14px);
+    }
+    to {
+      opacity: 1;
+      transform: rotateY(0deg) translateX(0);
+    }
+  }
+  @keyframes page-turn-prev {
+    from {
+      opacity: 0;
+      transform: rotateY(14deg) translateX(-14px);
+    }
+    to {
+      opacity: 1;
+      transform: rotateY(0deg) translateX(0);
+    }
+  }
+  .animate-turn-next {
+    transform-origin: left center;
+    animation: page-turn-next 0.5s ease-out both;
+  }
+  .animate-turn-prev {
+    transform-origin: right center;
+    animation: page-turn-prev 0.5s ease-out both;
+  }
+}
