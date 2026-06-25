@@ -1,25 +1,69 @@
 'use client'
 
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
+import gsap from 'gsap'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
+
 import { diaryPages } from './diary-pages'
 import { DiaryCover } from './diary-cover'
 import { DiaryBook } from './diary-book'
 import { PageTabs } from './page-tabs'
+import { HeartIntro } from './heart-intro'
+import { AnniversaryGreeting } from './anniversary-greeting'
+
+type Stage = 'cover' | 'intro' | 'greeting' | 'diary'
 
 export function DiaryApp() {
-  const [opened, setOpened] = useState(false)
-  const [opening, setOpening] = useState(false)
+  const [stage, setStage] = useState<Stage>('cover')
   const [index, setIndex] = useState(0)
   const [direction, setDirection] = useState<'next' | 'prev'>('next')
 
+  const stageRef = useRef<HTMLDivElement>(null)
+  const bookWrapperRef = useRef<HTMLDivElement>(null)
+
   const total = diaryPages.length
 
-  const open = useCallback(() => {
-    setOpening(true)
-    window.setTimeout(() => setOpened(true), 450)
-  }, [])
+  // REAL transition animation (old exits first)
+  const transitionStage = (nextStage: Stage) => {
+    if (!stageRef.current) {
+      setStage(nextStage)
+      return
+    }
+
+    gsap.timeline()
+      .to(stageRef.current, {
+        opacity: 0,
+        y: -30,
+        scale: 0.95,
+        duration: 0.8,
+        ease: 'power4.inOut',
+      })
+      .call(() => {
+        setStage(nextStage)
+      })
+  }
+
+  // REAL entry animation (new enters after mount)
+  useEffect(() => {
+    if (!stageRef.current) return
+
+    gsap.fromTo(
+      stageRef.current,
+      {
+        opacity: 0,
+        y: 35,
+        scale: 1.04,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        scale: 1,
+        duration: 1,
+        ease: 'power4.out',
+      }
+    )
+  }, [stage])
 
   const goTo = useCallback(
     (next: number) => {
@@ -29,19 +73,48 @@ export function DiaryApp() {
         return clamped
       })
     },
-    [total],
+    [total]
   )
 
-  // Arrow-key navigation once the diary is open.
+  const restartAll = () => {
+    setStage('cover')
+    setIndex(0)
+    setDirection('next')
+  }
+
+  // Diary open animation
   useEffect(() => {
-    if (!opened) return
+    if (stage !== 'diary' || !bookWrapperRef.current) return
+
+    gsap.fromTo(
+      bookWrapperRef.current,
+      {
+        scale: 0.88,
+        opacity: 0,
+        y: 55,
+      },
+      {
+        scale: 1,
+        opacity: 1,
+        y: 0,
+        duration: 1.2,
+        ease: 'power4.out',
+      }
+    )
+  }, [stage])
+
+  // Keyboard navigation
+  useEffect(() => {
+    if (stage !== 'diary') return
+
     const onKey = (e: KeyboardEvent) => {
       if (e.key === 'ArrowRight') goTo(index + 1)
       if (e.key === 'ArrowLeft') goTo(index - 1)
     }
+
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [opened, index, goTo])
+  }, [stage, index, goTo])
 
   const Current = diaryPages[index].Component
   const pageLabel = `${index + 1} / ${total}`
@@ -54,66 +127,104 @@ export function DiaryApp() {
           'radial-gradient(circle at 50% 30%, oklch(0.32 0.04 55), oklch(0.22 0.03 50) 75%)',
       }}
     >
-      {/* subtle desk vignette */}
+      {/* Background vignette */}
       <div
-        aria-hidden="true"
         className="pointer-events-none absolute inset-0"
         style={{
-          boxShadow: 'inset 0 0 200px rgba(0,0,0,0.55)',
+          boxShadow: 'inset 0 0 220px rgba(0,0,0,0.58)',
         }}
       />
 
-      {!opened ? (
-        <div className="relative z-10 flex flex-col items-center gap-6">
-          <DiaryCover onOpen={open} opening={opening} />
-        </div>
-      ) : (
-        <div className="relative z-10 flex w-full max-w-6xl items-stretch justify-center gap-2 md:gap-3">
-          {/* Prev */}
-          <NavButton
-            label="Previous page"
-            onClick={() => goTo(index - 1)}
-            disabled={index === 0}
+      {/* Stage wrapper */}
+      <div
+        ref={stageRef}
+        className="relative z-10 flex w-full items-center justify-center"
+      >
+        {/* STAGE 1 — Diary Cover */}
+        {stage === 'cover' && (
+          <DiaryCover
+            onOpen={() => transitionStage('intro')}
+            opening={false}
+          />
+        )}
+
+        {/* STAGE 2 — Emotional Thread Intro */}
+        {stage === 'intro' && (
+          <HeartIntro
+            onContinue={() => transitionStage('greeting')}
+          />
+        )}
+
+        {/* STAGE 3 — Anniversary Greeting */}
+        {stage === 'greeting' && (
+          <AnniversaryGreeting
+            onContinue={() => transitionStage('diary')}
+          />
+        )}
+
+        {/* STAGE 4 — Actual Diary */}
+        {stage === 'diary' && (
+          <div
+            ref={bookWrapperRef}
+            className="relative flex w-full max-w-6xl items-stretch justify-center gap-3"
           >
-            <ChevronLeft className="size-6" />
-          </NavButton>
+            {/* Previous */}
+            <NavButton
+              label="Previous page"
+              onClick={() => goTo(index - 1)}
+              disabled={index === 0}
+            >
+              <ChevronLeft className="size-6" />
+            </NavButton>
 
-          <div className="min-w-0 flex-1">
-            <DiaryBook turnKey={index} direction={direction} pageLabel={pageLabel}>
-              <Current />
-            </DiaryBook>
+            {/* Diary content */}
+            <div className="relative min-w-0 flex-1">
+              {index === 0 && (
+                <button
+                  onClick={restartAll}
+                  className="absolute right-6 top-6 z-40 rounded-full border border-gold/30 px-4 py-1 text-xs uppercase tracking-[0.22em] text-ink transition hover:bg-gold/10"
+                >
+                  Back
+                </button>
+              )}
+
+              <DiaryBook
+                turnKey={index}
+                direction={direction}
+                pageLabel={pageLabel}
+              >
+                <Current />
+              </DiaryBook>
+            </div>
+
+            {/* Next */}
+            <NavButton
+              label="Next page"
+              onClick={() => goTo(index + 1)}
+              disabled={index === total - 1}
+            >
+              <ChevronRight className="size-6" />
+            </NavButton>
+
+            {/* Desktop Tabs */}
+            <div className="hidden w-32 shrink-0 self-center lg:block">
+              <PageTabs current={index} onSelect={goTo} />
+            </div>
           </div>
+        )}
+      </div>
 
-          {/* Next */}
-          <NavButton
-            label="Next page"
-            onClick={() => goTo(index + 1)}
-            disabled={index === total - 1}
-          >
-            <ChevronRight className="size-6" />
-          </NavButton>
-
-          {/* Page selector tabs */}
-          <div className="hidden w-32 shrink-0 self-center lg:block">
-            <PageTabs current={index} onSelect={goTo} />
-          </div>
-        </div>
-      )}
-
-      {/* Mobile / tablet page selector */}
-      {opened && (
+      {/* Mobile Tabs */}
+      {stage === 'diary' && (
         <div className="absolute inset-x-0 bottom-3 z-20 flex justify-center lg:hidden">
           <div className="flex items-center gap-2 rounded-full bg-leather-dark/80 px-3 py-1.5 backdrop-blur">
             {diaryPages.map((p, i) => (
               <button
                 key={p.id}
-                type="button"
-                aria-label={`Go to ${p.tab}`}
-                aria-current={i === index ? 'page' : undefined}
                 onClick={() => goTo(i)}
                 className={cn(
                   'size-2.5 rounded-full transition-all',
-                  i === index ? 'scale-125 bg-gold' : 'bg-parchment/40',
+                  i === index ? 'scale-125 bg-gold' : 'bg-parchment/40'
                 )}
               />
             ))}
@@ -137,15 +248,14 @@ function NavButton({
 }) {
   return (
     <button
-      type="button"
-      aria-label={label}
       onClick={onClick}
       disabled={disabled}
+      aria-label={label}
       className={cn(
         'flex size-11 shrink-0 items-center justify-center self-center rounded-full',
         'bg-parchment/90 text-ink shadow-lg transition-all',
-        'hover:bg-parchment hover:scale-105',
-        'disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:scale-100',
+        'hover:scale-105 hover:bg-parchment',
+        'disabled:opacity-30'
       )}
     >
       {children}

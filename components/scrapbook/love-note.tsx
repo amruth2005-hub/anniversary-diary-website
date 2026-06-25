@@ -1,12 +1,9 @@
 'use client'
 
-import { useState, type ReactNode } from 'react'
+import { useEffect, useRef, useState, type ReactNode } from 'react'
+import gsap from 'gsap'
 import { cn } from '@/lib/utils'
 
-/**
- * A folded paper note that expands when tapped, like unfolding a
- * passed note. Closed state shows a teaser line.
- */
 export function LoveNote({
   teaser = 'read me',
   rotation = 1,
@@ -20,40 +17,136 @@ export function LoveNote({
 }) {
   const [open, setOpen] = useState(false)
 
+  const wrapperRef = useRef<HTMLButtonElement>(null)
+  const noteRef = useRef<HTMLDivElement>(null)
+  const contentRef = useRef<HTMLDivElement>(null)
+
+  // idle floating motion
+  useEffect(() => {
+    if (!wrapperRef.current) return
+
+    gsap.to(wrapperRef.current, {
+      y: -2,
+      rotation: rotation + 0.8,
+      duration: 2.8,
+      repeat: -1,
+      yoyo: true,
+      ease: 'sine.inOut',
+    })
+  }, [rotation])
+
+  const toggleNote = () => {
+    if (!noteRef.current || !contentRef.current) return
+
+    if (!open) {
+      const tl = gsap.timeline()
+
+      // folded paper lifts
+      tl.to(noteRef.current, {
+        rotateX: -18,
+        scale: 1.04,
+        y: -8,
+        duration: 0.25,
+        ease: 'power2.out',
+      })
+
+      // unfold content
+      tl.fromTo(
+        contentRef.current,
+        {
+          height: 0,
+          opacity: 0,
+        },
+        {
+          height: 'auto',
+          opacity: 1,
+          duration: 0.65,
+          ease: 'power3.out',
+        }
+      )
+
+      // settle naturally
+      tl.to(noteRef.current, {
+        rotateX: 0,
+        scale: 1,
+        y: 0,
+        duration: 0.45,
+        ease: 'back.out(1.6)',
+      })
+    } else {
+      const tl = gsap.timeline()
+
+      // fold back up
+      tl.to(contentRef.current, {
+        height: 0,
+        opacity: 0,
+        duration: 0.45,
+        ease: 'power2.inOut',
+      })
+
+      tl.to(
+        noteRef.current,
+        {
+          rotateX: 0,
+          scale: 1,
+          y: 0,
+          duration: 0.25,
+          ease: 'power2.out',
+        },
+        '-=0.15'
+      )
+    }
+
+    setOpen(!open)
+  }
+
   return (
     <button
+      ref={wrapperRef}
       type="button"
-      onClick={() => setOpen((o) => !o)}
+      onClick={toggleNote}
       aria-expanded={open}
       style={{ transform: `rotate(${rotation}deg)` }}
       className={cn(
         'group relative block cursor-pointer text-left focus:outline-none',
-        className,
+        className
       )}
     >
-      <div className="relative overflow-hidden rounded-sm bg-[oklch(0.94_0.03_88)] shadow-[0_6px_14px_rgba(40,25,15,0.22)] ring-1 ring-parchment-edge">
-        {/* fold crease lines */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 top-1/2 h-px bg-ink-soft/15"
-        />
-        <div
-          className={cn(
-            'px-5 transition-all duration-500',
-            open ? 'py-5' : 'py-3',
-          )}
-        >
-          {open ? (
-            <div className="font-hand text-xl leading-snug text-ink">
-              {children ?? 'I would choose you, again and again.'}
-            </div>
-          ) : (
-            <div className="flex items-center gap-2 font-hand text-lg text-ink-soft">
-              <span className="inline-block h-2 w-2 rounded-full bg-wax" />
-              {teaser}
-            </div>
-          )}
+      <div
+        ref={noteRef}
+        className={cn(
+          'relative overflow-hidden rounded-sm bg-[oklch(0.94_0.03_88)]',
+          'shadow-[0_8px_18px_rgba(40,25,15,0.24)]',
+          'ring-1 ring-parchment-edge'
+        )}
+        style={{
+          transformStyle: 'preserve-3d',
+        }}
+      >
+        {/* paper texture lines */}
+        <div className="pointer-events-none absolute inset-x-0 top-1/2 h-px bg-ink-soft/15" />
+        <div className="pointer-events-none absolute inset-y-0 left-1/2 w-px bg-ink-soft/10" />
+
+        {/* teaser */}
+        <div className="px-5 py-3">
+          <div className="flex items-center gap-2 font-hand text-lg text-ink-soft">
+            <span className="inline-block h-2 w-2 rounded-full bg-wax" />
+            {teaser}
+          </div>
         </div>
+
+        {/* hidden unfolded content */}
+        <div
+          ref={contentRef}
+          className="overflow-hidden px-4 h-0 opacity-0 max-w-[260px]"
+        >
+          <div className="pb-4 font-hand text-lg leading-snug text-ink">
+            {children ?? 'I would choose you, again and again.'}
+          </div>
+        </div>
+
+        {/* bottom soft shadow */}
+        <div className="absolute bottom-1 left-4 right-4 h-2 rounded-full bg-black/8 blur-md" />
       </div>
     </button>
   )
