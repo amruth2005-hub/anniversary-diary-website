@@ -4,6 +4,7 @@ import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { SpreadGrid, Half, HandText } from '../page-elements'
 import { TornPaperFrame } from '@/components/scrapbook/torn-paper-frame'
+import { TapeStrip } from '@/components/scrapbook/decorations'
 
 export function PageFuture() {
   const titleRef = useRef<HTMLDivElement>(null)
@@ -115,13 +116,13 @@ export function PageFuture() {
             The chapters ahead
           </p>
 
-          <h2 className="mt-2 font-serif text-4xl font-bold leading-tight text-ink md:text-5xl">
+          <h2 className="mt-2 font-serif text-3xl font-bold leading-tight text-ink md:text-5xl">
             What we’re building
           </h2>
         </div>
 
         <div ref={textRef}>
-          <HandText className="mt-4 max-w-sm">
+          <HandText className="mt-3 max-w-sm md:mt-4">
             There is still so much left for us to prove — to our parents, to
             the world, and to ourselves. Not with words, but with the lives we
             build, the peace we protect, and the success we earn.
@@ -129,24 +130,37 @@ export function PageFuture() {
         </div>
 
         <div ref={tornRef}>
-          <TornPaperFrame rotation={-2} className="mt-6 self-start">
+          <TornPaperFrame rotation={-2} className="mt-4 self-start md:mt-6">
             one day, they’ll understand us →
           </TornPaperFrame>
         </div>
       </Half>
 
       {/* RIGHT PAGE */}
-      <Half className="justify-center gap-4">
+      <Half className="justify-center gap-3 sm:gap-4">
         <div
           ref={paperRef}
-          className="paper-lines h-44 w-full rounded-sm bg-parchment-deep/40 ring-1 ring-parchment-edge shadow-[0_0_20px_rgba(255,220,160,0.12)]"
-        />
+          className="relative mx-auto w-full max-w-[15rem] rotate-[2deg] bg-[oklch(0.97_0.015_90)] p-2 shadow-[0_10px_25px_rgba(40,25,15,0.2)] ring-1 ring-parchment-edge sm:max-w-sm"
+        >
+          <TapeStrip
+            className="-top-3 left-1/2 -translate-x-1/2"
+            rotation={-3}
+          />
+
+          <div className="aspect-[3/4] overflow-hidden rounded-sm bg-parchment-deep">
+            <img
+              src="/memories/latest-selfie.jpeg"
+              alt="Our latest selfie together"
+              className="h-full w-full object-contain opacity-75"
+            />
+          </div>
+        </div>
 
         <p
           ref={footerRef}
-          className="text-center font-hand text-2xl text-ink-soft/70"
+          className="text-center font-hand text-xl text-ink-soft/70 sm:text-2xl"
         >
-          still blank — because our best pages haven’t happened yet
+          And if life asked me again, I’d still choose you.
         </p>
       </Half>
     </SpreadGrid>

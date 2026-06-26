@@ -79,7 +79,7 @@ export function DiaryBook({
       <div
         ref={bookRef}
         className={cn(
-          'relative mx-auto h-[80vh] w-full max-w-6xl',
+          'relative mx-auto h-[calc(100dvh-4.75rem)] w-full max-w-6xl md:h-[80vh]',
           'rounded-md shadow-[0_40px_80px_-20px_rgba(0,0,0,0.65)]'
         )}
       >
@@ -92,7 +92,7 @@ export function DiaryBook({
 
           {/* center spine */}
           <div
-            className="absolute inset-y-0 left-1/2 w-24 -translate-x-1/2"
+            className="absolute inset-y-0 left-1/2 hidden w-24 -translate-x-1/2 md:block"
             style={{
               background:
                 'linear-gradient(to right, transparent, rgba(30,15,8,0.45), rgba(15,8,4,0.6), rgba(30,15,8,0.45), transparent)',
@@ -100,7 +100,7 @@ export function DiaryBook({
           />
 
           {/* stitched seam */}
-          <div className="absolute inset-y-8 left-1/2 -translate-x-1/2 border-l border-dashed border-[#6d4d32]" />
+          <div className="absolute inset-y-8 left-1/2 hidden -translate-x-1/2 border-l border-dashed border-[#6d4d32] md:block" />
 
           {/* ambient page glow during flip */}
           <div className="page-glow absolute inset-0 bg-white/20 blur-2xl opacity-0 pointer-events-none" />
@@ -112,7 +112,7 @@ export function DiaryBook({
           <div
             ref={pageRef}
             key={turnKey}
-            className="relative h-full overflow-y-auto px-8 py-8 md:px-14 md:py-12"
+            className="no-scrollbar relative h-full overflow-y-auto px-4 py-5 sm:px-8 sm:py-8 md:px-14 md:py-12"
             style={{
               transformStyle: 'preserve-3d',
             }}
@@ -121,7 +121,7 @@ export function DiaryBook({
           </div>
 
           {/* page number */}
-          <span className="absolute bottom-4 right-8 font-serif italic text-sm text-[#7a5d43]">
+          <span className="absolute bottom-3 right-5 font-serif italic text-sm text-[#7a5d43] md:bottom-4 md:right-8">
             {pageLabel}
           </span>
 

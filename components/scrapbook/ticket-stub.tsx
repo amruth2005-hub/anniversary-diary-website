@@ -26,16 +26,16 @@ export function TicketStub({
         className,
       )}
     >
-      <div className="flex-1 p-3">
-        <p className="font-serif text-[10px] uppercase tracking-[0.25em] text-ink-soft">
+      <div className="min-w-0 flex-1 p-2 sm:p-3">
+        <p className="font-serif text-[9px] uppercase tracking-[0.18em] text-ink-soft sm:text-[10px] sm:tracking-[0.25em]">
           {label}
         </p>
-        <div className="mt-1 flex items-end gap-2 font-serif text-ink">
-          <span className="text-2xl font-bold">{from}</span>
+        <div className="mt-1 flex min-w-0 items-end gap-1 font-serif text-ink sm:gap-2">
+          <span className="truncate text-lg font-bold sm:text-2xl">{from}</span>
           <span className="pb-1 text-ink-soft">→</span>
-          <span className="text-2xl font-bold">{to}</span>
+          <span className="truncate text-lg font-bold sm:text-2xl">{to}</span>
         </div>
-        <p className="mt-1 font-hand text-lg text-ink-soft">
+        <p className="mt-1 font-hand text-base text-ink-soft sm:text-lg">
           a trip to remember
         </p>
       </div>
@@ -44,11 +44,11 @@ export function TicketStub({
         aria-hidden="true"
         className="w-px border-l-2 border-dashed border-ink-soft/40"
       />
-      <div className="flex w-16 flex-col items-center justify-center bg-parchment-deep/60 p-2 text-center">
-        <span className="font-serif text-[9px] uppercase tracking-widest text-ink-soft">
+      <div className="flex w-12 flex-col items-center justify-center bg-parchment-deep/60 p-2 text-center sm:w-16">
+        <span className="font-serif text-[8px] uppercase tracking-widest text-ink-soft sm:text-[9px]">
           Seat
         </span>
-        <span className="font-serif text-xl font-bold text-ink">{seat}</span>
+        <span className="font-serif text-lg font-bold text-ink sm:text-xl">{seat}</span>
       </div>
     </div>
   )

@@ -4,7 +4,6 @@ import { useState } from 'react'
 import { HeartBurst } from '../heart-burst'
 import { SpreadGrid, Half, HandText } from '../page-elements'
 import { PolaroidFrame } from '@/components/scrapbook/polaroid-frame'
-import { TapedPhoto } from '@/components/scrapbook/taped-photo'
 import { CoffeeStain, WaxSeal } from '@/components/scrapbook/decorations'
 
 export function PageCover() {
@@ -43,18 +42,17 @@ export function PageCover() {
         <Half className="items-center justify-center">
           <div className="relative h-full min-h-[18rem] w-full">
             <PolaroidFrame
-              caption="day one"
+              caption="us now"
               rotation={-5}
               tape
-              className="absolute left-2 top-2 w-40 md:w-48"
-            />
-
-            <TapedPhoto
-              caption="us"
-              rotation={4}
-              corners="diagonal"
-              className="absolute bottom-4 right-2 w-44 md:w-52"
-            />
+              className="pointer-events-none absolute right-0 top-4 w-36 max-w-[calc(100%-1rem)] opacity-60 md:right-6 md:top-6 md:w-44"
+            >
+              <img
+                src="/memories/latest-selfie.jpeg"
+                alt="Our latest selfie together"
+                className="h-full w-full object-contain opacity-80"
+              />
+            </PolaroidFrame>
 
             <WaxSeal
               label="2yr"

@@ -184,17 +184,17 @@ export function HeartIntro({
   }
 
   return (
-    <div className="flex min-h-dvh items-center justify-center px-6">
-      <div className="relative flex w-full max-w-5xl flex-col items-center gap-8">
-        <div className="relative flex items-center gap-6">
+    <div className="flex h-full items-center justify-center overflow-hidden px-4 py-4 sm:px-6 sm:py-8">
+      <div className="relative flex h-full w-full max-w-5xl flex-col items-center justify-center gap-4 sm:h-auto sm:gap-8">
+        <div className="relative flex flex-col items-center gap-1 sm:flex-row sm:gap-6">
           <div
             ref={leftRef}
-            className="font-hand text-4xl text-rose-300"
+            className="font-hand text-3xl text-rose-300 sm:text-4xl"
           >
             Ammu
           </div>
 
-          <svg className="h-10 w-44" viewBox="0 0 180 40">
+          <svg className="h-7 w-28 sm:h-10 sm:w-44" viewBox="0 0 180 40">
             <defs>
               <linearGradient id="emotionPulse">
                 <stop offset="0%" stopColor="#fda4af" />
@@ -215,7 +215,7 @@ export function HeartIntro({
 
           <div
             ref={rightRef}
-            className="font-hand text-4xl text-amber-200"
+            className="font-hand text-3xl text-amber-200 sm:text-4xl"
           >
             Bangaram
           </div>
@@ -224,7 +224,7 @@ export function HeartIntro({
         <div
           onMouseEnter={onHover}
           onMouseLeave={onLeave}
-          className="relative h-[280px] w-full"
+          className="relative hidden h-[280px] w-full sm:block"
         >
           <svg
             className="absolute inset-0 h-full w-full"
@@ -265,9 +265,66 @@ export function HeartIntro({
           </div>
         </div>
 
+        <div className="w-full max-w-[22rem] sm:hidden">
+          <div className="no-scrollbar overflow-x-auto py-1">
+            <div className="relative h-28 w-[42rem]">
+              <svg
+                className="absolute left-0 top-2 h-16 w-full"
+                viewBox="0 0 672 96"
+                preserveAspectRatio="none"
+              >
+                <path
+                  d="M24 48 C68 8, 104 88, 148 48 S228 8, 272 48 S352 88, 396 48 S476 8, 520 48 S604 88, 648 48"
+                  fill="none"
+                  stroke="#d4a373"
+                  strokeWidth="3"
+                  strokeLinecap="round"
+                  strokeDasharray="8 8"
+                />
+              </svg>
+
+              {memories.map((memory, i) => {
+                const points = [
+                  { left: 4, top: 46 },
+                  { left: 14, top: 24 },
+                  { left: 24, top: 62 },
+                  { left: 34, top: 36 },
+                  { left: 44, top: 58 },
+                  { left: 54, top: 34 },
+                  { left: 64, top: 60 },
+                  { left: 74, top: 38 },
+                  { left: 84, top: 58 },
+                  { left: 94, top: 46 },
+                ]
+                const point = points[i]
+
+                return (
+                  <div
+                    key={memory}
+                    className="absolute flex -translate-x-1/2 flex-col items-center gap-1"
+                    style={{
+                      left: `${point.left}%`,
+                      top: `${point.top}px`,
+                    }}
+                  >
+                    <span className="z-10 size-3 rounded-full bg-wax shadow-[0_0_0_4px_rgba(255,245,220,0.18)]" />
+                    <span className="max-w-[4.6rem] rounded-full bg-[rgba(255,245,220,0.94)] px-2 py-1 text-center text-[10px] leading-tight text-ink shadow-md">
+                      {memory}
+                    </span>
+                  </div>
+                )
+              })}
+            </div>
+          </div>
+
+          <div className="text-center text-5xl leading-none text-red-500">
+            ♥
+          </div>
+        </div>
+
         <p
           ref={quoteRef}
-          className="max-w-2xl text-center font-hand text-2xl text-parchment"
+          className="max-w-2xl text-center font-hand text-lg leading-snug text-parchment sm:text-2xl"
         >
           A diary can hold our memories...
           but never the full weight of what we are.

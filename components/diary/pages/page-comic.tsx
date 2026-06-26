@@ -3,33 +3,48 @@
 import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 import { SpreadGrid, Half, PageTitle, HandText } from '../page-elements'
-import { PhotoPlaceholder } from '@/components/scrapbook/photo-placeholder'
 import { cn } from '@/lib/utils'
 
 const panels = [
-  { caption: 'ego vs ego', rotation: -1 },
-  { caption: 'third person chaos', rotation: 1.5 },
-  { caption: 'stubborn silence', rotation: -1.5 },
-  { caption: 'still us', rotation: 1 },
+  {
+    caption: 'video call chaos',
+    rotation: -1,
+    src: '/memories/funny1.jpeg',
+    alt: 'A funny video call moment',
+  },
+  {
+    caption: 'still us',
+    rotation: 1.5,
+    src: '/memories/funny2.jpeg',
+    alt: 'Another funny video call moment',
+  },
 ]
 
 function ComicPanel({
   caption,
   rotation,
+  src,
+  alt,
 }: {
   caption: string
   rotation: number
+  src: string
+  alt: string
 }) {
   return (
     <figure
       style={{ transform: `rotate(${rotation}deg)` }}
       className="relative bg-[oklch(0.96_0.02_90)] p-2 shadow-[0_5px_12px_rgba(40,25,15,0.22)] ring-2 ring-ink/70"
     >
-      <div className="aspect-square overflow-hidden">
-        <PhotoPlaceholder label="panel" />
+      <div className="aspect-[3/4] overflow-hidden bg-parchment-deep">
+        <img
+          src={src}
+          alt={alt}
+          className="h-full w-full object-contain"
+        />
       </div>
 
-      <figcaption className="mt-1 bg-ink px-2 py-0.5 text-center font-hand text-base text-parchment">
+      <figcaption className="mt-1 bg-ink px-2 py-0.5 text-center font-hand text-sm text-parchment sm:text-base">
         {caption}
       </figcaption>
     </figure>
@@ -168,8 +183,8 @@ export function PageComic() {
         <div
           ref={bubbleRef}
           className={cn(
-            'mt-6 inline-block rounded-2xl bg-[oklch(0.96_0.02_90)] px-4 py-3',
-            'font-hand text-xl text-ink shadow ring-1 ring-ink/30',
+            'mt-4 inline-block rounded-2xl bg-[oklch(0.96_0.02_90)] px-4 py-2 sm:mt-6 sm:py-3',
+            'font-hand text-lg text-ink shadow ring-1 ring-ink/30 sm:text-xl',
             'relative after:absolute after:-bottom-2 after:left-8 after:h-4 after:w-4 after:rotate-45 after:bg-[oklch(0.96_0.02_90)] after:ring-1 after:ring-ink/30'
           )}
         >
@@ -179,7 +194,7 @@ export function PageComic() {
 
       {/* RIGHT PAGE */}
       <Half className="justify-center">
-        <div className="grid grid-cols-2 gap-4">
+        <div className="mx-auto flex w-full max-w-[13rem] flex-col gap-3 sm:max-w-[16rem] sm:gap-4">
           {panels.map((p, i) => (
             <div
               key={p.caption}
@@ -192,6 +207,8 @@ export function PageComic() {
               <ComicPanel
                 caption={p.caption}
                 rotation={p.rotation}
+                src={p.src}
+                alt={p.alt}
               />
             </div>
           ))}

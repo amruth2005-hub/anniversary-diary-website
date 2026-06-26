@@ -91,9 +91,11 @@
   }
   body {
     @apply bg-background text-foreground;
+    overflow: hidden;
   }
   html {
     @apply font-serif;
+    overflow: hidden;
   }
 }
 
@@ -198,6 +200,13 @@
 
   .preserve-3d {
     transform-style: preserve-3d;
+  }
+  .no-scrollbar {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
   }
   .backface-hidden {
     backface-visibility: hidden;

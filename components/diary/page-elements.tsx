@@ -17,7 +17,7 @@ export function SpreadGrid({
   return (
     <div
       className={cn(
-        'grid h-full grid-cols-1 gap-8 md:grid-cols-2 md:gap-x-16',
+        'grid h-full grid-cols-1 gap-5 md:grid-cols-2 md:gap-x-16 md:gap-y-8',
         className,
       )}
     >
@@ -51,13 +51,13 @@ export function PageTitle({
   className?: string
 }) {
   return (
-    <header className={cn('mb-5', className)}>
+    <header className={cn('mb-3 md:mb-5', className)}>
       {kicker && (
         <p className="font-serif text-xs uppercase tracking-[0.3em] text-ink-soft/80">
           {kicker}
         </p>
       )}
-      <h2 className="font-serif text-3xl font-bold text-ink md:text-4xl">
+      <h2 className="font-serif text-2xl font-bold leading-tight text-ink md:text-4xl">
         {children}
       </h2>
     </header>
@@ -75,7 +75,7 @@ export function HandText({
   return (
     <p
       className={cn(
-        'font-hand text-xl leading-snug text-ink-soft md:text-2xl',
+        'font-hand text-lg leading-snug text-ink-soft md:text-2xl',
         className,
       )}
     >

@@ -121,7 +121,7 @@ export function DiaryApp() {
 
   return (
     <main
-      className="relative flex min-h-dvh w-full items-center justify-center overflow-hidden p-4 md:p-8"
+      className="relative box-border flex h-dvh max-h-dvh w-full items-center justify-center overflow-hidden p-3 md:p-8"
       style={{
         background:
           'radial-gradient(circle at 50% 30%, oklch(0.32 0.04 55), oklch(0.22 0.03 50) 75%)',
@@ -138,7 +138,7 @@ export function DiaryApp() {
       {/* Stage wrapper */}
       <div
         ref={stageRef}
-        className="relative z-10 flex w-full items-center justify-center"
+        className="relative z-10 flex h-full w-full items-center justify-center"
       >
         {/* STAGE 1 — Diary Cover */}
         {stage === 'cover' && (
@@ -166,16 +166,18 @@ export function DiaryApp() {
         {stage === 'diary' && (
           <div
             ref={bookWrapperRef}
-            className="relative flex w-full max-w-6xl items-stretch justify-center gap-3"
+            className="relative flex w-full max-w-6xl items-center justify-center md:items-stretch md:gap-3"
           >
             {/* Previous */}
-            <NavButton
-              label="Previous page"
-              onClick={() => goTo(index - 1)}
-              disabled={index === 0}
-            >
-              <ChevronLeft className="size-6" />
-            </NavButton>
+            <div className="absolute left-1 top-1/2 z-40 -translate-y-1/2 md:static md:translate-y-0">
+              <NavButton
+                label="Previous page"
+                onClick={() => goTo(index - 1)}
+                disabled={index === 0}
+              >
+                <ChevronLeft className="size-6" />
+              </NavButton>
+            </div>
 
             {/* Diary content */}
             <div className="relative min-w-0 flex-1">
@@ -198,13 +200,15 @@ export function DiaryApp() {
             </div>
 
             {/* Next */}
-            <NavButton
-              label="Next page"
-              onClick={() => goTo(index + 1)}
-              disabled={index === total - 1}
-            >
-              <ChevronRight className="size-6" />
-            </NavButton>
+            <div className="absolute right-1 top-1/2 z-40 -translate-y-1/2 md:static md:translate-y-0">
+              <NavButton
+                label="Next page"
+                onClick={() => goTo(index + 1)}
+                disabled={index === total - 1}
+              >
+                <ChevronRight className="size-6" />
+              </NavButton>
+            </div>
 
             {/* Desktop Tabs */}
             <div className="hidden w-32 shrink-0 self-center lg:block">

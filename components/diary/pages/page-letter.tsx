@@ -83,12 +83,12 @@ export function PageLetter() {
       {
         x: 80,
         opacity: 0,
-        rotate: 8,
+        rotate: 0,
       },
       {
         x: 0,
         opacity: 1,
-        rotate: 3,
+        rotate: 0,
         duration: 1,
         ease: 'power4.out',
       },
@@ -121,7 +121,7 @@ export function PageLetter() {
             The night everything changed
           </p>
 
-          <h2 className="mt-1 font-serif text-3xl font-bold text-ink md:text-4xl">
+          <h2 className="mt-1 font-serif text-2xl font-bold text-ink md:text-4xl">
             June 26 → June 27
           </h2>
         </div>
@@ -129,11 +129,11 @@ export function PageLetter() {
         {/* Letter */}
         <div
           ref={letterRef}
-          className="mt-6 rounded-sm border border-parchment-edge bg-[oklch(0.95_0.025_88)] px-6 py-5 shadow-[0_10px_25px_rgba(40,25,15,0.18)]"
+          className="mt-4 rounded-sm border border-parchment-edge bg-[oklch(0.95_0.025_88)] px-4 py-4 shadow-[0_10px_25px_rgba(40,25,15,0.18)] md:mt-6 md:px-6 md:py-5"
         >
           <div
             ref={textRef}
-            className="space-y-3 font-hand text-2xl leading-snug text-ink"
+            className="space-y-2 font-hand text-xl leading-snug text-ink md:space-y-3 md:text-2xl"
           >
             <p>Bangaram,</p>
 
@@ -169,13 +169,22 @@ export function PageLetter() {
 
       {/* RIGHT PAGE */}
       <Half className="items-center justify-center">
-        <div ref={photoRef}>
+        <div ref={photoRef} className="flex flex-col items-center">
           <PolaroidFrame
-            caption="the call that changed everything"
+            caption="dress gift"
             rotation={3}
             tape
-            className="w-56 md:w-64"
-          />
+            className="w-40 max-w-full sm:w-56 md:w-64"
+          >
+            <img
+              src="/memories/dress-gift.jpeg"
+              alt="The dress gift memory"
+              className="h-full w-full object-contain"
+            />
+          </PolaroidFrame>
+          <p className="mt-3 max-w-[13rem] text-center font-hand text-lg leading-snug text-ink-soft sm:mt-5 sm:max-w-xs sm:text-xl">
+            The dress I gave you, and you made it beautiful.
+          </p>
         </div>
       </Half>
     </SpreadGrid>

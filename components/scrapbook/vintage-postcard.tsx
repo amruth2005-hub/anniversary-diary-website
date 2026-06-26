@@ -27,7 +27,7 @@ export function VintagePostcard({
     <div
       style={{ transform: `rotate(${rotation}deg)` }}
       className={cn(
-        'relative grid w-full grid-cols-2 gap-3 rounded-sm bg-[oklch(0.93_0.035_85)] p-3 shadow-[0_8px_18px_rgba(40,25,15,0.28)] ring-1 ring-parchment-edge',
+        'relative grid w-full grid-cols-1 gap-3 rounded-sm bg-[oklch(0.93_0.035_85)] p-3 shadow-[0_8px_18px_rgba(40,25,15,0.28)] ring-1 ring-parchment-edge sm:grid-cols-2',
         className,
       )}
     >

@@ -5,7 +5,7 @@ import { PageTravel } from './pages/page-travel'
 import { PageLittleThings } from './pages/page-little-things'
 import { PageLetter } from './pages/page-letter'
 import { PageComic } from './pages/page-comic'
-import { PageSecrets } from './pages/page-secrets'
+import { PageFamily } from './pages/page-family'
 import { PageFuture } from './pages/page-future'
 
 export type DiaryPage = {
@@ -22,6 +22,6 @@ export const diaryPages: DiaryPage[] = [
   { id: 'little', tab: 'Little things', Component: PageLittleThings },
   { id: 'letter', tab: 'A letter', Component: PageLetter },
   { id: 'comic', tab: 'Funny us', Component: PageComic },
-  { id: 'secrets', tab: 'Secret notes', Component: PageSecrets },
+  { id: 'family', tab: 'Family', Component: PageFamily },
   { id: 'future', tab: 'What\u2019s next', Component: PageFuture },
 ]

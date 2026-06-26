@@ -102,7 +102,7 @@ export function AnniversaryGreeting({
   }, [])
 
   return (
-    <div className="relative flex min-h-dvh items-center justify-center overflow-hidden px-6">
+    <div className="relative flex min-h-dvh items-center justify-center overflow-hidden px-4 py-8 sm:px-6">
       {/* sparkles */}
       {[...Array(12)].map((_, i) => (
         <div
@@ -123,7 +123,7 @@ export function AnniversaryGreeting({
       <div className="flex max-w-5xl flex-col items-center text-center">
         <h1
           ref={titleRef}
-          className="flex flex-col gap-2 font-serif text-5xl leading-tight text-parchment md:text-7xl"
+          className="flex flex-col gap-2 font-serif text-4xl leading-tight text-parchment sm:text-5xl md:text-7xl"
         >
           <span>Happy Anniversary</span>
           <span>of Togetherness</span>
@@ -132,7 +132,7 @@ export function AnniversaryGreeting({
 
         <p
           ref={subtitleRef}
-          className="mt-8 max-w-2xl font-hand text-2xl leading-relaxed text-gold/80"
+          className="mt-6 max-w-2xl font-hand text-xl leading-relaxed text-gold/80 sm:mt-8 sm:text-2xl"
         >
           Two years of love, distance, chaos, healing, patience,
           and choosing each other over and over again.
@@ -141,7 +141,7 @@ export function AnniversaryGreeting({
         <button
           ref={buttonRef}
           onClick={onContinue}
-          className="mt-10 rounded-full border border-gold/40 px-8 py-3 text-parchment transition hover:bg-gold/10"
+          className="mt-8 rounded-full border border-gold/40 px-8 py-3 text-parchment transition hover:bg-gold/10 sm:mt-10"
         >
           Open Our Diary
         </button>

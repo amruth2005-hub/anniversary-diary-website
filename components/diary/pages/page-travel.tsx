@@ -5,13 +5,12 @@ import gsap from 'gsap'
 import { SpreadGrid, Half, PageTitle, HandText } from '../page-elements'
 import { VintagePostcard } from '@/components/scrapbook/vintage-postcard'
 import { TicketStub } from '@/components/scrapbook/ticket-stub'
-import { TapedPhoto } from '@/components/scrapbook/taped-photo'
+import { TapeStrip } from '@/components/scrapbook/decorations'
 
 export function PageTravel() {
   const postcardRef = useRef<HTMLDivElement>(null)
   const ticketOneRef = useRef<HTMLDivElement>(null)
   const ticketTwoRef = useRef<HTMLDivElement>(null)
-  const photoRef = useRef<HTMLDivElement>(null)
   const noteRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -53,24 +52,6 @@ export function PageTravel() {
       '-=0.5'
     )
 
-    // photo reveal
-    tl.fromTo(
-      photoRef.current,
-      {
-        y: -40,
-        opacity: 0,
-        rotate: 8,
-      },
-      {
-        y: 0,
-        opacity: 1,
-        rotate: 4,
-        duration: 1.1,
-        ease: 'power4.out',
-      },
-      '-=0.6'
-    )
-
     // note reveal
     tl.fromTo(
       noteRef.current,
@@ -88,7 +69,7 @@ export function PageTravel() {
     )
 
     // floating memory effect
-    gsap.to(photoRef.current, {
+    gsap.to(postcardRef.current, {
       y: -6,
       duration: 2.4,
       repeat: -1,
@@ -116,34 +97,20 @@ export function PageTravel() {
   return (
     <SpreadGrid>
       {/* LEFT PAGE */}
-      <Half className="gap-6">
+      <Half className="gap-4 md:gap-6">
         <PageTitle kicker="Chapter two">
           July 18 — the day Bangaram became real
         </PageTitle>
 
-        {/* postcard */}
-        <div
-          ref={postcardRef}
-          onMouseEnter={flipPostcard}
-          onMouseLeave={resetPostcard}
-          style={{ transformStyle: 'preserve-3d' }}
-          className="cursor-pointer"
-        >
-          <VintagePostcard
-            destination="July 18"
-            message="I couldn’t even look into your eyes that day."
-            rotation={-2}
-          />
-        </div>
-
         {/* memory tickets */}
-        <div className="mt-3 flex flex-col gap-4">
+        <div className="mt-2 flex flex-col gap-3 md:mt-3 md:gap-4">
           <div ref={ticketOneRef}>
             <TicketStub
               from="Stranger"
               to="Bangaram"
               seat="18"
               rotation={-2}
+              className="max-w-[15rem] sm:max-w-xs"
             />
           </div>
 
@@ -154,34 +121,50 @@ export function PageTravel() {
               seat="3X"
               label="The Return"
               rotation={2}
+              className="max-w-[15rem] sm:max-w-xs"
             />
           </div>
+        </div>
+
+        {/* handwritten diary note */}
+        <div ref={noteRef}>
+          <HandText className="mt-1 max-w-sm rotate-[-2deg] leading-snug md:mt-2 md:text-lg md:leading-relaxed">
+            On the way back,
+            after pizza and silence,
+            I kissed you three times.
+
+            That was the moment
+            I knew there was no going back.
+          </HandText>
         </div>
       </Half>
 
       {/* RIGHT PAGE */}
       <Half className="items-center justify-center">
-        <div className="relative h-full min-h-[20rem] w-full">
-          {/* first meet photo */}
-          <div ref={photoRef}>
-            <TapedPhoto
-              rotation={4}
-              corners="all"
-              caption="our first meeting"
-              className="absolute right-4 top-3 w-52 md:w-60"
+        <div className="relative flex h-full min-h-[16rem] w-full items-center justify-center md:min-h-[20rem]">
+          <div
+            ref={postcardRef}
+            onMouseEnter={flipPostcard}
+            onMouseLeave={resetPostcard}
+            style={{ transformStyle: 'preserve-3d' }}
+            className="relative w-full max-w-md cursor-pointer"
+          >
+            <TapeStrip
+              className="-top-3 left-10 h-5 w-16"
+              rotation={-12}
             />
-          </div>
 
-          {/* handwritten diary note */}
-          <div ref={noteRef}>
-            <HandText className="absolute bottom-4 left-4 max-w-[16rem] rotate-[-2deg] text-lg leading-relaxed">
-              On the way back,
-              after pizza and silence,
-              I kissed you three times.
-
-              That was the moment
-              I knew there was no going back.
-            </HandText>
+            <VintagePostcard
+              destination="July 18"
+              message="I couldn’t even look into your eyes that day."
+              rotation={-2}
+            >
+              <img
+                src="/memories/journey-selfie.jpeg"
+                alt="Our journey selfie together"
+                className="h-full w-full object-contain"
+              />
+            </VintagePostcard>
           </div>
         </div>
       </Half>

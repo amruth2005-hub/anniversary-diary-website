@@ -209,7 +209,7 @@ export function HeartBurst({
         ref={containerRef}
         onMouseEnter={burst}
         onMouseLeave={rebuild}
-        className="relative h-[520px] w-[520px] cursor-pointer"
+        className="relative h-[min(72vw,520px)] w-[min(72vw,520px)] cursor-pointer sm:h-[520px] sm:w-[520px]"
       >
         {/* CENTER GLOW */}
         <div

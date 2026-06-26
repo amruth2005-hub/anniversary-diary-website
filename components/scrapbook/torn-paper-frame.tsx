@@ -19,8 +19,8 @@ export function TornPaperFrame({
       style={{ transform: `rotate(${rotation}deg)` }}
       className={cn('relative inline-block', className)}
     >
-      <div className="torn-edge bg-[oklch(0.94_0.03_88)] px-5 pb-6 pt-4 shadow-[0_6px_14px_rgba(40,25,15,0.2)]">
-        <div className="font-hand text-xl leading-snug text-ink">
+      <div className="torn-edge bg-[oklch(0.94_0.03_88)] px-4 pb-5 pt-3 shadow-[0_6px_14px_rgba(40,25,15,0.2)] sm:px-5 sm:pb-6 sm:pt-4">
+        <div className="font-hand text-lg leading-snug text-ink sm:text-xl">
           {children}
         </div>
       </div>

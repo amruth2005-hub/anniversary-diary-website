@@ -5,7 +5,6 @@ import gsap from 'gsap'
 
 import { SpreadGrid, Half, PageTitle, HandText } from '../page-elements'
 import { PolaroidFrame } from '@/components/scrapbook/polaroid-frame'
-import { TapedPhoto } from '@/components/scrapbook/taped-photo'
 import { TornPaperFrame } from '@/components/scrapbook/torn-paper-frame'
 import { PaperClip } from '@/components/scrapbook/decorations'
 
@@ -13,7 +12,6 @@ export function PageFirstMemories() {
   const photoRef = useRef<HTMLDivElement>(null)
   const noteRef = useRef<HTMLDivElement>(null)
   const polaroidOneRef = useRef<HTMLDivElement>(null)
-  const polaroidTwoRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const tl = gsap.timeline()
@@ -52,7 +50,7 @@ export function PageFirstMemories() {
     )
 
     tl.fromTo(
-      [polaroidOneRef.current, polaroidTwoRef.current],
+      polaroidOneRef.current,
       {
         opacity: 0,
         y: 50,
@@ -94,7 +92,7 @@ export function PageFirstMemories() {
   return (
     <SpreadGrid>
       {/* LEFT PAGE */}
-      <Half className="gap-5">
+      <Half className="gap-4 md:gap-5">
         <PageTitle kicker="Chapter one">
           From strangers to Bangaram
         </PageTitle>
@@ -104,18 +102,24 @@ export function PageFirstMemories() {
           onMouseEnter={() => lift(photoRef.current)}
           onMouseLeave={() => reset(photoRef.current)}
         >
-          <TapedPhoto
+          <PolaroidFrame
+            caption="first meet"
             rotation={-3}
-            corners="top"
-            caption="from names to Bangaram"
-            className="w-52"
-          />
+            tape
+            className="w-48 max-w-full sm:w-64"
+          >
+            <img
+              src="/memories/first-meet.jpeg"
+              alt="Her shy smile from our first meet"
+              className="h-full w-full object-contain"
+            />
+          </PolaroidFrame>
         </div>
 
         <div ref={noteRef}>
           <TornPaperFrame
             rotation={2}
-            className="mt-4 max-w-xs self-end"
+            className="mt-2 max-w-xs self-end md:mt-4"
           >
             Back in 10th grade,
             we were only names in each other&apos;s world.
@@ -125,7 +129,7 @@ export function PageFirstMemories() {
           </TornPaperFrame>
         </div>
 
-        <HandText className="mt-4 max-w-sm">
+        <HandText className="mt-2 max-w-sm md:mt-4">
           It started with a music note on Instagram.
           “Ravali Ra” was the song that unknowingly brought us closer.
 
@@ -137,36 +141,27 @@ export function PageFirstMemories() {
 
       {/* RIGHT PAGE */}
       <Half className="items-center justify-center">
-        <div className="relative h-full min-h-[24rem] w-full overflow-visible">
-          <PaperClip className="absolute top-6 right-20 rotate-12" />
+        <div className="relative flex min-h-[12rem] w-full items-center justify-center overflow-visible md:block md:h-full md:min-h-[24rem]">
+          <PaperClip className="absolute right-20 top-6 hidden rotate-12 md:block" />
 
           {/* Ravali Ra */}
           <div
             ref={polaroidOneRef}
-            className="absolute right-8 top-12"
+            className="relative md:absolute md:right-8 md:top-12"
             onMouseEnter={() => lift(polaroidOneRef.current)}
             onMouseLeave={() => reset(polaroidOneRef.current)}
           >
             <PolaroidFrame
-              caption="Ravali Ra"
+              caption="early us"
               rotation={5}
-              className="w-40 md:w-44"
-            />
-          </div>
-
-          {/* First notes */}
-          <div
-            ref={polaroidTwoRef}
-            className="absolute left-8 bottom-10"
-            onMouseEnter={() => lift(polaroidTwoRef.current)}
-            onMouseLeave={() => reset(polaroidTwoRef.current)}
-          >
-            <PolaroidFrame
-              caption="our first notes"
-              rotation={-6}
-              tape
-              className="w-40 md:w-44"
-            />
+              className="w-40 max-w-[calc(100%-1rem)] md:w-52"
+            >
+              <img
+                src="/memories/early-selfie.jpeg"
+                alt="One of our early selfies together"
+                className="h-full w-full object-contain"
+              />
+            </PolaroidFrame>
           </div>
         </div>
       </Half>

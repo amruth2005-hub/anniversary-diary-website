@@ -4,53 +4,33 @@ import { useEffect, useRef } from 'react'
 import gsap from 'gsap'
 
 import { SpreadGrid, Half, PageTitle, HandText } from '../page-elements'
-import { PolaroidFrame } from '@/components/scrapbook/polaroid-frame'
 import { TapedPhoto } from '@/components/scrapbook/taped-photo'
 import { TornPaperFrame } from '@/components/scrapbook/torn-paper-frame'
 import { WaxSeal } from '@/components/scrapbook/decorations'
 
 export function PageFamily() {
-  const photoOneRef = useRef<HTMLDivElement>(null)
-  const photoTwoRef = useRef<HTMLDivElement>(null)
+  const photoRef = useRef<HTMLDivElement>(null)
   const noteRef = useRef<HTMLDivElement>(null)
   const sealRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const tl = gsap.timeline()
 
-    // Left photo enters
+    // Family photo enters
     tl.fromTo(
-      photoOneRef.current,
+      photoRef.current,
       {
         opacity: 0,
-        x: -40,
-        rotate: -6,
+        y: 35,
+        rotate: 4,
       },
       {
         opacity: 1,
-        x: 0,
-        rotate: -2,
+        y: 0,
+        rotate: 0,
         duration: 0.9,
         ease: 'power3.out',
       }
-    )
-
-    // Right photo enters
-    tl.fromTo(
-      photoTwoRef.current,
-      {
-        opacity: 0,
-        x: 40,
-        rotate: 6,
-      },
-      {
-        opacity: 1,
-        x: 0,
-        rotate: 3,
-        duration: 0.9,
-        ease: 'power3.out',
-      },
-      '-=0.5'
     )
 
     // Note reveal
@@ -86,15 +66,7 @@ export function PageFamily() {
     )
 
     // subtle breathing
-    gsap.to(photoOneRef.current, {
-      y: -4,
-      duration: 2.8,
-      repeat: -1,
-      yoyo: true,
-      ease: 'sine.inOut',
-    })
-
-    gsap.to(photoTwoRef.current, {
+    gsap.to(photoRef.current, {
       y: -4,
       duration: 2.4,
       repeat: -1,
@@ -106,7 +78,7 @@ export function PageFamily() {
   return (
     <SpreadGrid>
       {/* LEFT PAGE */}
-      <Half className="gap-6">
+      <Half className="gap-4 md:gap-6">
         <PageTitle kicker="Chapter seven">
           The people watching us grow
         </PageTitle>
@@ -115,15 +87,6 @@ export function PageFamily() {
           They may not fully understand us yet. Maybe they worry more than they
           trust. But deep down, they want what is best for us.
         </HandText>
-
-        <div ref={photoOneRef}>
-          <PolaroidFrame
-            caption="your first talk with amma"
-            rotation={-2}
-            tape
-            className="w-52"
-          />
-        </div>
 
         <div ref={noteRef}>
           <TornPaperFrame rotation={2} className="max-w-xs self-end">
@@ -135,17 +98,23 @@ export function PageFamily() {
 
       {/* RIGHT PAGE */}
       <Half className="items-center justify-center">
-        <div className="relative h-full min-h-[22rem] w-full">
-          <div ref={photoTwoRef}>
+        <div className="relative flex h-full min-h-[18rem] w-full flex-col items-center justify-center gap-3 sm:gap-5 md:min-h-[22rem]">
+          <div ref={photoRef}>
             <TapedPhoto
               rotation={3}
               corners="all"
-              caption="meeting aunty"
-              className="absolute right-6 top-6 w-56"
-            />
+              caption="The day my world met yours."
+              className="w-full max-w-sm"
+            >
+              <img
+                src="/memories/family-meet.jpeg"
+                alt="The day my world met yours"
+                className="h-full w-full object-contain"
+              />
+            </TapedPhoto>
           </div>
 
-          <HandText className="absolute bottom-10 left-2 max-w-[16rem] rotate-[-2deg]">
+          <HandText className="max-w-sm rotate-[-2deg] text-center">
             They worry about our future. They don’t fully believe in us yet.
             But one day, we’ll prove to them — and to ourselves —
             that what we have is rare.

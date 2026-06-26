@@ -128,8 +128,8 @@ export function LoveNote({
         <div className="pointer-events-none absolute inset-y-0 left-1/2 w-px bg-ink-soft/10" />
 
         {/* teaser */}
-        <div className="px-5 py-3">
-          <div className="flex items-center gap-2 font-hand text-lg text-ink-soft">
+        <div className="px-4 py-2 sm:px-5 sm:py-3">
+          <div className="flex items-center gap-2 font-hand text-base text-ink-soft sm:text-lg">
             <span className="inline-block h-2 w-2 rounded-full bg-wax" />
             {teaser}
           </div>
@@ -138,9 +138,9 @@ export function LoveNote({
         {/* hidden unfolded content */}
         <div
           ref={contentRef}
-          className="overflow-hidden px-4 h-0 opacity-0 max-w-[260px]"
+          className="h-0 max-w-[260px] overflow-hidden px-4 opacity-0"
         >
-          <div className="pb-4 font-hand text-lg leading-snug text-ink">
+          <div className="pb-3 font-hand text-base leading-snug text-ink sm:pb-4 sm:text-lg">
             {children ?? 'I would choose you, again and again.'}
           </div>
         </div>
