@@ -86,7 +86,6 @@ export function HeartBurst({
     })
 
     const heart = new THREE.Mesh(heartGeometry, heartMaterial)
-    heart.rotation.z = Math.PI
 
     const heartGroup = new THREE.Group()
     heartGroup.add(heart)
