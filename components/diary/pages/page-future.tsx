@@ -110,7 +110,7 @@ export function PageFuture() {
   return (
     <SpreadGrid>
       {/* LEFT PAGE */}
-      <Half className="justify-center">
+      <Half className="justify-start md:justify-center">
         <div ref={titleRef}>
           <p className="font-serif text-xs uppercase tracking-[0.3em] text-ink-soft">
             The chapters ahead
@@ -137,10 +137,10 @@ export function PageFuture() {
       </Half>
 
       {/* RIGHT PAGE */}
-      <Half className="justify-center gap-3 sm:gap-4">
+      <Half className="justify-start gap-2 sm:gap-4 md:justify-center">
         <div
           ref={paperRef}
-          className="relative mx-auto w-full max-w-[15rem] rotate-[2deg] bg-[oklch(0.97_0.015_90)] p-2 shadow-[0_10px_25px_rgba(40,25,15,0.2)] ring-1 ring-parchment-edge sm:max-w-sm"
+          className="relative mx-auto w-full max-w-[13.5rem] rotate-[2deg] bg-[oklch(0.97_0.015_90)] p-2 shadow-[0_10px_25px_rgba(40,25,15,0.2)] ring-1 ring-parchment-edge sm:max-w-sm"
         >
           <TapeStrip
             className="-top-3 left-1/2 -translate-x-1/2"

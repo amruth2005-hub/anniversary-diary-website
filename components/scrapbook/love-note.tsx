@@ -124,8 +124,8 @@ export function LoveNote({
         }}
       >
         {/* paper texture lines */}
-        <div className="pointer-events-none absolute inset-x-0 top-1/2 h-px bg-ink-soft/15" />
-        <div className="pointer-events-none absolute inset-y-0 left-1/2 w-px bg-ink-soft/10" />
+        <div className="pointer-events-none absolute inset-x-0 top-1/2 hidden h-px bg-ink-soft/15 md:block" />
+        <div className="pointer-events-none absolute inset-y-0 left-1/2 hidden w-px bg-ink-soft/10 md:block" />
 
         {/* teaser */}
         <div className="px-4 py-2 sm:px-5 sm:py-3">

@@ -97,8 +97,8 @@ export function PageFamily() {
       </Half>
 
       {/* RIGHT PAGE */}
-      <Half className="items-center justify-center">
-        <div className="relative flex h-full min-h-[18rem] w-full flex-col items-center justify-center gap-3 sm:gap-5 md:min-h-[22rem]">
+      <Half className="items-center justify-start md:justify-center">
+        <div className="relative flex w-full flex-col items-center justify-start gap-2 sm:gap-5 md:h-full md:min-h-[22rem] md:justify-center">
           <div ref={photoRef}>
             <TapedPhoto
               rotation={3}
@@ -114,7 +114,7 @@ export function PageFamily() {
             </TapedPhoto>
           </div>
 
-          <HandText className="max-w-sm rotate-[-2deg] text-center">
+          <HandText className="max-w-sm rotate-[-2deg] text-center text-base sm:text-lg md:text-2xl">
             They worry about our future. They don’t fully believe in us yet.
             But one day, we’ll prove to them — and to ourselves —
             that what we have is rare.

@@ -132,15 +132,9 @@
     );
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 767px) {
     .paper-lines {
-      background-image: repeating-linear-gradient(
-        to bottom,
-        transparent 0,
-        transparent 38px,
-        oklch(0.55 0.05 60 / 0.08) 38px,
-        oklch(0.55 0.05 60 / 0.08) 39px
-      );
+      background-image: none;
     }
   }
 

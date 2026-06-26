@@ -140,8 +140,8 @@ export function PageFirstMemories() {
       </Half>
 
       {/* RIGHT PAGE */}
-      <Half className="items-center justify-center">
-        <div className="relative flex min-h-[12rem] w-full items-center justify-center overflow-visible md:block md:h-full md:min-h-[24rem]">
+      <Half className="items-center justify-start md:justify-center">
+        <div className="relative flex w-full items-center justify-center overflow-visible py-1 md:block md:h-full md:min-h-[24rem] md:py-0">
           <PaperClip className="absolute right-20 top-6 hidden rotate-12 md:block" />
 
           {/* Ravali Ra */}

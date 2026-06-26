@@ -171,8 +171,8 @@ export function PageLittleThings() {
       </Half>
 
       {/* RIGHT PAGE */}
-      <Half className="justify-center gap-3 sm:gap-5">
-        <p className="font-hand text-xl text-ink sm:text-2xl">tap to unfold ↓</p>
+      <Half className="justify-start gap-2 sm:justify-center sm:gap-5">
+        <p className="font-hand text-lg text-ink sm:text-2xl">tap to unfold ↓</p>
 
         <div
           ref={chatRef}
@@ -193,7 +193,7 @@ export function PageLittleThings() {
               rotation={34}
             />
 
-            <div className="aspect-[3/4] w-40 max-w-[68vw] overflow-hidden bg-parchment-deep sm:w-48 md:w-56">
+            <div className="aspect-[3/4] w-36 max-w-[64vw] overflow-hidden bg-parchment-deep sm:w-48 md:w-56">
               <img
                 src="/memories/ammu-bangaram-chat.jpeg"
                 alt="Ammu Bangaram chat memory"
@@ -201,13 +201,13 @@ export function PageLittleThings() {
               />
             </div>
 
-            <figcaption className="mt-1 text-center font-hand text-base text-ink-soft sm:text-lg">
+            <figcaption className="mt-0.5 text-center font-hand text-base text-ink-soft sm:mt-1 sm:text-lg">
               Ammu &amp; Bangaram
             </figcaption>
           </figure>
         </div>
 
-        <div className="no-scrollbar flex w-full gap-2 overflow-x-auto pb-1 sm:block sm:space-y-5 sm:overflow-visible sm:pb-0">
+        <div className="no-scrollbar flex w-full gap-2 overflow-x-auto pb-0.5 sm:block sm:space-y-5 sm:overflow-visible sm:pb-0">
           {[
             {
               teaser: 'Ammu',
