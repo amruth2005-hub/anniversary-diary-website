@@ -12,7 +12,7 @@ export function PageCover() {
   return (
     <div className="relative h-full">
       <SpreadGrid>
-        <Half className="justify-center">
+        <Half className="justify-start pt-1 md:justify-center md:pt-0">
           <CoffeeStain className="-left-2 top-2 opacity-70" size={110} />
 
           <p className="font-serif text-xs uppercase tracking-[0.35em] text-ink-soft">
@@ -27,25 +27,25 @@ export function PageCover() {
             together &amp; counting
           </p>
 
-          <div className="mt-6 max-w-sm border-l-2 border-parchment-edge pl-4">
+          <div className="mt-4 max-w-sm border-l-2 border-parchment-edge pl-4 md:mt-6">
             <HandText>
               I made this for you — a place to keep every memory we&apos;ve
               collected. Turn the pages slowly. Each one is a little piece of us.
             </HandText>
 
-            <p className="mt-3 font-hand text-xl text-ink">
+            <p className="mt-2 font-hand text-xl text-ink md:mt-3">
               — always yours
             </p>
           </div>
         </Half>
 
-        <Half className="items-center justify-center">
-          <div className="relative h-full min-h-[18rem] w-full">
+        <Half className="items-center justify-start md:justify-center">
+          <div className="relative h-36 min-h-0 w-full md:h-full md:min-h-[18rem]">
             <PolaroidFrame
               caption="us now"
               rotation={-5}
               tape
-              className="pointer-events-none absolute right-0 top-4 w-36 max-w-[calc(100%-1rem)] opacity-60 md:right-6 md:top-6 md:w-44"
+              className="pointer-events-none absolute right-2 top-0 w-32 max-w-[calc(100%-1rem)] opacity-60 md:right-6 md:top-6 md:w-44"
             >
               <img
                 src="/memories/latest-selfie.jpeg"
@@ -56,7 +56,7 @@ export function PageCover() {
 
             <WaxSeal
               label="2yr"
-              className="absolute bottom-2 left-6 rotate-[-8deg]"
+              className="absolute bottom-0 left-4 rotate-[-8deg] md:bottom-2 md:left-6"
             />
           </div>
         </Half>

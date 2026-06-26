@@ -17,7 +17,7 @@ export function SpreadGrid({
   return (
     <div
       className={cn(
-        'grid h-full grid-cols-1 gap-5 md:grid-cols-2 md:gap-x-16 md:gap-y-8',
+        'grid min-h-full grid-cols-1 content-start gap-3 md:h-full md:grid-cols-2 md:content-stretch md:gap-x-16 md:gap-y-8',
         className,
       )}
     >

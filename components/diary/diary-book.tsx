@@ -79,7 +79,7 @@ export function DiaryBook({
       <div
         ref={bookRef}
         className={cn(
-          'relative mx-auto h-[calc(100dvh-4.75rem)] w-full max-w-6xl md:h-[80vh]',
+          'relative mx-auto h-[calc(100dvh-4.25rem)] w-full max-w-6xl md:h-[80vh]',
           'rounded-md shadow-[0_40px_80px_-20px_rgba(0,0,0,0.65)]'
         )}
       >
@@ -106,13 +106,13 @@ export function DiaryBook({
           <div className="page-glow absolute inset-0 bg-white/20 blur-2xl opacity-0 pointer-events-none" />
 
           {/* inner shadow */}
-          <div className="absolute inset-0 shadow-[inset_0_0_60px_rgba(60,40,25,0.18)]" />
+          <div className="absolute inset-0 shadow-[inset_0_0_42px_rgba(60,40,25,0.16)] md:shadow-[inset_0_0_60px_rgba(60,40,25,0.18)]" />
 
           {/* flipping content */}
           <div
             ref={pageRef}
             key={turnKey}
-            className="no-scrollbar relative h-full overflow-y-auto px-4 py-5 sm:px-8 sm:py-8 md:px-14 md:py-12"
+            className="no-scrollbar relative h-full overflow-y-auto px-3 py-4 sm:px-8 sm:py-8 md:px-14 md:py-12"
             style={{
               transformStyle: 'preserve-3d',
             }}
@@ -127,7 +127,7 @@ export function DiaryBook({
 
           {/* folded page corner */}
           <div
-            className="absolute bottom-0 right-0 h-14 w-14"
+            className="absolute bottom-0 right-0 h-10 w-10 md:h-14 md:w-14"
             style={{
               background:
                 'linear-gradient(135deg, transparent 50%, rgba(120,90,60,0.35) 52%, rgba(80,55,35,0.5) 100%)',
