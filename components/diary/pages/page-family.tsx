@@ -120,7 +120,7 @@ export function PageFamily() {
             that what we have is rare.
           </HandText>
 
-          <div ref={sealRef}>
+          <div ref={sealRef} className="hidden md:block">
             <WaxSeal
               label="∞"
               className="absolute bottom-4 right-6 rotate-[-8deg]"

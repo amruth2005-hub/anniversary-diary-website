@@ -65,29 +65,29 @@ export function PageFuture() {
     tl.fromTo(
       paperRef.current,
       {
-        opacity: 0,
-        scale: 0.96,
+        opacity: 0.45,
+        scale: 0.98,
       },
       {
         opacity: 1,
         scale: 1,
-        duration: 1,
+        duration: 0.7,
         ease: 'power2.out',
       },
-      '-=0.3'
+      '-=0.85'
     )
 
     tl.fromTo(
       footerRef.current,
       {
-        opacity: 0,
+        opacity: 0.45,
       },
       {
         opacity: 1,
-        duration: 1,
+        duration: 0.7,
         ease: 'power2.out',
       },
-      '-=0.4'
+      '-=0.45'
     )
 
     gsap.to(paperRef.current, {
@@ -99,7 +99,7 @@ export function PageFuture() {
     })
 
     gsap.to(footerRef.current, {
-      opacity: 0.55,
+      opacity: 0.78,
       duration: 2,
       repeat: -1,
       yoyo: true,

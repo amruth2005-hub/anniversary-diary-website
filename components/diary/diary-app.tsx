@@ -169,7 +169,7 @@ export function DiaryApp() {
             className="relative flex w-full max-w-6xl items-center justify-center md:items-stretch md:gap-3"
           >
             {/* Previous */}
-            <div className="absolute left-1 top-1/2 z-40 -translate-y-1/2 md:static md:translate-y-0">
+            <div className="hidden md:static md:z-40 md:block md:translate-y-0">
               <NavButton
                 label="Previous page"
                 onClick={() => goTo(index - 1)}
@@ -200,7 +200,7 @@ export function DiaryApp() {
             </div>
 
             {/* Next */}
-            <div className="absolute right-1 top-1/2 z-40 -translate-y-1/2 md:static md:translate-y-0">
+            <div className="hidden md:static md:z-40 md:block md:translate-y-0">
               <NavButton
                 label="Next page"
                 onClick={() => goTo(index + 1)}
@@ -220,18 +220,40 @@ export function DiaryApp() {
 
       {/* Mobile Tabs */}
       {stage === 'diary' && (
-        <div className="absolute inset-x-0 bottom-3 z-20 flex justify-center lg:hidden">
-          <div className="flex items-center gap-2 rounded-full bg-leather-dark/80 px-3 py-1.5 backdrop-blur">
+        <div className="absolute inset-x-0 bottom-0 z-20 flex justify-center lg:hidden">
+          <div className="flex items-center gap-2 rounded-full bg-leather-dark/80 px-2.5 py-1 backdrop-blur">
+            <button
+              type="button"
+              onClick={() => goTo(index - 1)}
+              disabled={index === 0}
+              aria-label="Previous page"
+              className="flex size-7 items-center justify-center rounded-full text-parchment transition hover:bg-parchment/10 disabled:opacity-30"
+            >
+              <ChevronLeft className="size-3.5" />
+            </button>
+
             {diaryPages.map((p, i) => (
               <button
                 key={p.id}
+                type="button"
                 onClick={() => goTo(i)}
+                aria-label={p.tab}
                 className={cn(
                   'size-2.5 rounded-full transition-all',
                   i === index ? 'scale-125 bg-gold' : 'bg-parchment/40'
                 )}
               />
             ))}
+
+            <button
+              type="button"
+              onClick={() => goTo(index + 1)}
+              disabled={index === total - 1}
+              aria-label="Next page"
+              className="flex size-7 items-center justify-center rounded-full text-parchment transition hover:bg-parchment/10 disabled:opacity-30"
+            >
+              <ChevronRight className="size-3.5" />
+            </button>
           </div>
         </div>
       )}

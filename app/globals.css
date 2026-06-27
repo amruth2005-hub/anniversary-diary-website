@@ -186,22 +186,26 @@
   }
 
   .torn-edge {
-    -webkit-mask-image: radial-gradient(
-      circle at center bottom,
-      black 0 5px,
-      transparent 5.5px
+    clip-path: polygon(
+      0 0,
+      100% 0,
+      100% calc(100% - 7px),
+      96% 100%,
+      91% calc(100% - 4px),
+      86% 100%,
+      80% calc(100% - 6px),
+      73% 100%,
+      66% calc(100% - 4px),
+      59% 100%,
+      52% calc(100% - 5px),
+      45% 100%,
+      38% calc(100% - 4px),
+      31% 100%,
+      24% calc(100% - 6px),
+      17% 100%,
+      10% calc(100% - 4px),
+      0 calc(100% - 7px)
     );
-    -webkit-mask-size: 14px 100%;
-    -webkit-mask-repeat: repeat-x;
-    -webkit-mask-position: bottom;
-    mask-image: radial-gradient(
-      circle at center bottom,
-      black 0 5px,
-      transparent 5.5px
-    );
-    mask-size: 14px 100%;
-    mask-repeat: repeat-x;
-    mask-position: bottom;
   }
 
   .preserve-3d {
